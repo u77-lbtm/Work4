@@ -1,9 +1,10 @@
 package skyshop.service;
 
+import org.springframework.stereotype.Service;
 import skyshop.model.article.Article;
 import skyshop.model.product.Product;
 import skyshop.model.search.Searchable;
-import org.springframework.stereotype.Service;
+import skyshop.product.SimpleProduct;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -24,17 +25,14 @@ public class StorageService {
         fillTestData(); // Автоматически заполняем хранилище при создании
     }
 
-    // Метод для получения всех продуктов
     public Collection<Product> getAllProducts() {
         return products.values();
     }
 
-    // Метод для получения всех статей
     public Collection<Article> getAllArticles() {
         return articles.values();
     }
 
-    // Метод для получения всех объектов (продуктов и статей) для поиска
     public Collection<Searchable> getAllSearchables() {
         List<Searchable> allItems = new ArrayList<>();
         allItems.addAll(products.values());
@@ -42,15 +40,12 @@ public class StorageService {
         return allItems;
     }
 
-
-    // Приватный метод для заполнения хранилища начальными данными
     private void fillTestData() {
-        // Примечание: если Product у вас abstract, подставьте сюда конкретных наследников
-        // Например: SimpleProduct, DiscountedProduct и т.д.
-        /*
         Product apple = new SimpleProduct("Яблоко", 100);
+        Product bread = new SimpleProduct("Хлеб", 50);
+
         products.put(apple.getId(), apple);
-        */
+        products.put(bread.getId(), bread);
 
         Article article1 = new Article("Польза яблок", "Яблоки содержат много железа и витаминов.");
         Article article2 = new Article("Как выбрать свежий хлеб", "Обращайте внимание на хрустящую корочку.");
