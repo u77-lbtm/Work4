@@ -2,9 +2,9 @@ package skyshop.service;
 
 import org.springframework.stereotype.Service;
 import skyshop.model.article.Article;
-import skyshop.model.product.Product;
+
 import skyshop.model.search.Searchable;
-import skyshop.product.SimpleProduct;
+
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -12,6 +12,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+import skyshop.model.product.Product;
+import skyshop.model.product.SimpleProduct;
 
 @Service
 public class StorageService {

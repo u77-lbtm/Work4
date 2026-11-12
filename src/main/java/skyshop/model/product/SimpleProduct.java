@@ -1,4 +1,4 @@
-package skyshop.product;
+package skyshop.model.product;
 
 
 
