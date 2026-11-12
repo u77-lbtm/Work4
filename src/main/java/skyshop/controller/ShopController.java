@@ -4,6 +4,9 @@ import skyshop.model.article.Article;
 import skyshop.model.product.Product;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestParam;
+import skyshop.model.search.SearchResult;
+import skyshop.service.SearchService;
 import skyshop.service.StorageService;
 
 import java.util.Collection;
@@ -12,10 +15,13 @@ import java.util.Collection;
 public class ShopController {
 
         private final StorageService storageService;
+        private final SearchService searchService;
 
         // Внедряем StorageService через конструктор
-        public ShopController(StorageService storageService) {
+        public ShopController(StorageService storageService, SearchService searchService) {
                 this.storageService = storageService;
+                this.searchService = searchService;
+
         }
 
         @GetMapping("/products")
@@ -26,5 +32,10 @@ public class ShopController {
         @GetMapping("/articles")
         public Collection<Article> getAllArticles() {
                 return storageService.getAllArticles();
+        }
+
+        @GetMapping("/search")
+        public Collection<SearchResult> search(@RequestParam("pattern") String pattern) {
+                return searchService.search(pattern);
         }
 }
