@@ -1,7 +1,7 @@
 package skyshop.product;
 
 
-import skyshop.model.product.Product;
+
 
 public class SimpleProduct extends Product {
 
