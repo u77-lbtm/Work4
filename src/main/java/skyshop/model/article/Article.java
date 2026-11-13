@@ -39,7 +39,7 @@ public final class Article implements Searchable {
     }
     @Override
     public UUID getId() {
-        return null;
+        return id;
     }
 
 
