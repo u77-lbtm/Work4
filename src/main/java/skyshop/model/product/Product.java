@@ -1,14 +1,21 @@
 
 package skyshop.model.product;
 import skyshop.model.search.Searchable;
-import java.util.UUID;
+import java.util.*;
+
+
+
 
 public abstract class Product implements Searchable {
 
     private final String name;
-    private final UUID id;
+   private final UUID id;
+
+
 
     public Product(String name) {
+        this.name = name;
+        this.id=UUID.randomUUID();
         if (name == null) {
             throw new IllegalArgumentException("Имя продукта не может быть null");
         }
@@ -16,15 +23,15 @@ public abstract class Product implements Searchable {
             throw new IllegalArgumentException("Имя продукта не может состоять только из пробелов");
         }
 
-        this.name = name;
-        this.id = UUID.randomUUID();
+
         System.out.println("Данные корректны: " + name);
     }
-
     @Override
-    public UUID getId() {
+            public UUID getId(){
+
         return id;
     }
+
 
     @Override
     public String getName() {
@@ -40,6 +47,7 @@ public abstract class Product implements Searchable {
     public String getContentType() {
         return "PRODUCT";
     }
+
 
     public abstract int getPrice();
 

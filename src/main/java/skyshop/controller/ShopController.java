@@ -11,8 +11,11 @@ import skyshop.service.StorageService;
 
 import java.util.Collection;
 
+import static java.awt.SystemColor.text;
+import static jdk.javadoc.internal.doclets.formats.html.markup.HtmlStyles.title;
+
 @RestController
-public class ShopController {
+public class ShopController implements Controller {
 
         private final StorageService storageService;
         private final SearchService searchService;
@@ -37,5 +40,16 @@ public class ShopController {
         @GetMapping("/search")
         public Collection<SearchResult> search(@RequestParam("pattern") String pattern) {
                 return searchService.search(pattern);
+        }
+        @com.fasterxml.jackson.annotation.JsonIgnore
+        @Override
+        public String getSearchTerm() {
+                return title + " " + text;
+        }
+
+        @com.fasterxml.jackson.annotation.JsonIgnore
+        @Override
+        public String getContentType() {
+                return "ARTICLE";
         }
 }
