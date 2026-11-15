@@ -57,4 +57,8 @@ public abstract class Product implements Searchable {
     public boolean isSpecial() {
         return false;
     }
+
+    public boolean getStringRepresentation() {
+        return false;
+    }
 }

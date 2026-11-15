@@ -12,6 +12,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+import java.util.Optional;
 import skyshop.model.product.Product;
 import skyshop.model.product.SimpleProduct;
 
@@ -54,7 +55,9 @@ public class StorageService {
 
         articles.put(article1.getId(), article1);
         articles.put(article2.getId(), article2);
-
-
     }
+    public Optional<Product> getProductById(UUID id) {
+        return Optional.ofNullable(products.get(id));
+    }
+
 }
