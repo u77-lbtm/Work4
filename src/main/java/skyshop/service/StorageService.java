@@ -1,8 +1,9 @@
+//Zdec ne bilo Exceptions
 package skyshop.service;
 
 import org.springframework.stereotype.Service;
 import skyshop.model.article.Article;
-
+import skyshop.exception.NoSuchProductException;
 import skyshop.model.search.Searchable;
 
 
@@ -57,7 +58,7 @@ public class StorageService {
         articles.put(article2.getId(), article2);
     }
     public Optional<Product> getProductById(UUID id) {
-        return Optional.ofNullable(products.get(id));
+                return Optional.ofNullable(products.get(id));
     }
 
 }
