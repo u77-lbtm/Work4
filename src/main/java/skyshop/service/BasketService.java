@@ -12,6 +12,7 @@ import java.util.stream.Collectors;
 
 @Service
 public class BasketService {
+
     private final ProductBasket productBasket;
     private final StorageService storageService;
 
@@ -19,14 +20,13 @@ public class BasketService {
         this.productBasket = productBasket;
         this.storageService = storageService;
     }
-    public void addProductToBasket(UUID id) {
 
+    public void addProductToBasket(UUID id) {
         Product product = storageService.getProductById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Продукт с id " + id + " не найден"));
 
         productBasket.addProduct(product.getId());
     }
-    //корзины пользователя с ценами и итоговой суммой.
 
     public UserBasket getUserBasket() {
         List<BasketItem> items = productBasket.getProducts().entrySet().stream()
@@ -40,4 +40,3 @@ public class BasketService {
         return new UserBasket(items);
     }
 }
-

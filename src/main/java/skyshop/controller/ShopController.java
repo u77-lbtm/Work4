@@ -1,30 +1,33 @@
 package skyshop.controller;
 
-import skyshop.model.article.Article;
-import skyshop.model.product.Product;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+import skyshop.model.article.Article;
+import skyshop.model.basket.UserBasket;
+import skyshop.model.product.Product;
 import skyshop.model.search.SearchResult;
+import skyshop.service.BasketService;
 import skyshop.service.SearchService;
 import skyshop.service.StorageService;
 
 import java.util.Collection;
-
-import static java.awt.SystemColor.text;
-import static jdk.javadoc.internal.doclets.formats.html.markup.HtmlStyles.title;
+import java.util.UUID;
 
 @RestController
-public class ShopController implements Controller {
+public class ShopController {
 
         private final StorageService storageService;
         private final SearchService searchService;
+        private final BasketService basketService;
 
-        // Внедряем StorageService через конструктор
-        public ShopController(StorageService storageService, SearchService searchService) {
+        public ShopController(StorageService storageService,
+                              SearchService searchService,
+                              BasketService basketService) {
                 this.storageService = storageService;
                 this.searchService = searchService;
-
+                this.basketService = basketService;
         }
 
         @GetMapping("/products")
@@ -41,15 +44,17 @@ public class ShopController implements Controller {
         public Collection<SearchResult> search(@RequestParam("pattern") String pattern) {
                 return searchService.search(pattern);
         }
-        @com.fasterxml.jackson.annotation.JsonIgnore
-        @Override
-        public String getSearchTerm() {
-                return title + " " + text;
+
+
+        @GetMapping("/basket/{id}")
+        public String addProduct(@PathVariable("id") UUID id) {
+                basketService.addProductToBasket(id);
+                return "*Продукт успешно добавлен*";
         }
 
-        @com.fasterxml.jackson.annotation.JsonIgnore
-        @Override
-        public String getContentType() {
-                return "ARTICLE";
+
+        @GetMapping("/basket")
+        public UserBasket getUserBasket() {
+                return basketService.getUserBasket();
         }
 }
